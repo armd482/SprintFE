@@ -74,5 +74,33 @@
   <br>
 
   ## Position의 속성들과 각각의 특징을 설명해주세요.<br>
+  Position은 html에서 해당 요소를 어떠한 방식으로 배치할 지 정의하는 속성으로, position 속성에는 다음과 같은 것들이 있다.<br>
+  <ul>
+    <li>static</li>
+    <li>relative</li>
+    <li>absolute</li>
+    <li>fixed</li>
+    <li>sticky</li>
+  </ul>
   
+<b>static</b>
+static은 position의 기본적인 상태로, 모든 태그들이 오른쪽 또는 아래 방향으로 html 문서 상에서 원래 있어야하는 위치에 배치된다.<br>
+따라서 top, left, bottom, right의 속성이 모두 무시된다.<br>
+<br>
+<b>relative</b>
+relative는 기존 static의 상태에서 원래 위치에서 상대적으로 벗어나게 배치된다.<br>
+상대적으로 배치되기 때문에 top, left, bottom, right 속성이 적용되지만, 다른 요소들에게는 영향을 주지 않는다.<br>
+<br>
+<b>Absolute</b><br>
+absolute는 자신이 아닌 상위 요소 중 position 속성 값이 static이 아닌 요소를 기준으로 원래 위치에서 벗어나 독립적으로 배치된다<br>
+이때 상위 요소의 position 속성 값이 전부 static인 경우 최상위 요소를 기준으로 배치된다.<br>
+따라서 position이 relative인 상위요소를 기준으로 top, left, bottom, right 속성이 적용되고, 다른 요소들의 위치도 영향을 미친다.<br>
+<br>
+<b>fixed</b>
+fixed는 viewport를 기준으로 특정 부분에 고정되어 움직이지 않도록 배치된다.<br>
+따라서 top, left, bottom, right의 기준이 사용자의 화면을 기준으로 적용되고 글의 흐름에서 완전히 벗어나기 때문에 다른 요소들의 위치에 영향을 미치지 않는다.<br>
+<br>
+<b>sticky</b><br>
+sticky는 원래의 위치에 배치되었다가, 스크롤을 통해서 정해진 위치를 벗어나면 fixed처럼 특정 부분에 고정되어 배치된다.<br>
+sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 설정해야 하며, 해당 값을 기준으로 fixed로 변경된다.
 </details>
