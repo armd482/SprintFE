@@ -152,6 +152,7 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
   Rebase는 분기된 branch에 있는 모든 커밋을 복사하여 그대로 기존 branch의 커밋에 이어서 추가되는 방식이다. 마찬가지로 분기된 branch는 제거된다. Squash와의 차이라면 Squash는 분기된 커밋을 하나의 커밋으로 합쳐서 추가되는 반면에 Rebase는 분기된 branch 커밋이 그대로 추가된다는 점이다. 마지막에 merge되는 방식은 Fast-Forward 방식가 동일하다.<br>
   ![image](https://github.com/armd482/SprintFE/assets/89967066/81d1eb79-bea2-4b70-ad9b-fdead263cf15)
   <br>
+  <br>
   ## Git Flow 브랜치 전략에 대해 설명해 주세요.
   Git Flow는 <b>Main 브랜치</b>, <b>Develop 브랜치</b>, <b>Supporting 브랜치</b>로 구분되며 Supporting 브랜치에서 <b>Feature 브랜치</b>, <b>Release 브랜치</b>, <b>Hotfix 브랜치</b>로 구분하여 관리하는 전략으로 프로젝트의 <b>브랜치를 효과적으로 관리하기 위한 워크플로우</b>이다.
 
