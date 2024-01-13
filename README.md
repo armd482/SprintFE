@@ -120,35 +120,35 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
   #### Merge
   
   ```bash
-  $ git checkout main
-  $ git merge branch
+    $ git checkout main
+    $ git merge branch
   ```
   가장 일반적인 merge방식으로, branch의 커밋 상태에 따라서 두 가지로 진행된다.
   
   ##### Fast-Forward Merge
-  분기된 branch에서 기존 branch로 병합을 시도할 때, 기존 branch가 따로 커밋한 경우가 없을 경우, 기존 branch가 그대로 분기된 branch로 이동하는 방식이다. 특이점이라면 단순 이동이기 때문에 커밋이 발생하지 않으며 충돌 또한 발생하지 않는다.
+  분기된 branch에서 기존 branch로 병합을 시도할 때, 기존 branch가 따로 커밋한 경우가 없을 경우, 기존 branch가 그대로 분기된 branch로 이동하는 방식이다. 특이점이라면 단순 이동이기 때문에 커밋이 발생하지 않으며 충돌 또한 발생하지 않는다.<br>
   ![image](https://github.com/armd482/SprintFE/assets/89967066/bb994a96-4b4b-40c5-b3d7-03fa2e182ac2)
 
   ##### 3-Way(Recursive) Merge
-  Fast-Forward와는 다르게 기존 branch에서 새로운 커밋이 생겼으며, 이 상태에서 분기된 branch와 병합할 경우 기존 branch와 분기된 branch가 합쳐지는 과정에서 충돌이 발생한다. 충돌을 해결한 후에는 기존 branch에 새로운 merge commit이 발생한다.
+  Fast-Forward와는 다르게 기존 branch에서 새로운 커밋이 생겼으며, 이 상태에서 분기된 branch와 병합할 경우 기존 branch와 분기된 branch가 합쳐지는 과정에서 충돌이 발생한다. 충돌을 해결한 후에는 기존 branch에 새로운 merge commit이 발생한다.<br>
   ![image](https://github.com/armd482/SprintFE/assets/89967066/0b25e775-e34a-4630-8a45-2cfa2162f9db)
 
   
   #### Squash
   ```bash
-  $ git checkout main
-  $ git merge --squash branch
+    $ git checkout main
+    $ git merge --squash branch
   ```
-  Squash는 merge에 squash 옵션을 추면 실행되며, 분기된 branch의 모든 커밋을 하나로 합친 후에 기존 branch의 분기 이후의 커밋에 이어서 추가되는 방식으로 분기된 brahcn는 이후 제거된다.
+  Squash는 merge에 squash 옵션을 추면 실행되며, 분기된 branch의 모든 커밋을 하나로 합친 후에 기존 branch의 분기 이후의 커밋에 이어서 추가되는 방식으로 분기된 brahcn는 이후 제거된다.<br>
   ![image](https://github.com/armd482/SprintFE/assets/89967066/0ff9668c-0866-499e-934a-48f6bcddeaee)
 
   #### Rebase
   ```bash
-  $ git checkout branch
-  $ git rebase main
-  $ git checkout main
-  $ git merge branch
-```
-Rebase는 분기된 branch에 있는 모든 커밋을 복사하여 그대로 기존 branch의 커밋에 이어서 추가되는 방식이다. 마찬가지로 분기된 branch는 제거된다. Squash와의 차이라면 Squash는 분기된 커밋을 하나의 커밋으로 합쳐서 추가되는 반면에 Rebase는 분기된 branch 커밋이 그대로 추가된다는 점이다. 마지막에 merge되는 방식은 Fast-Forward 방식가 동일하다.
-![image](https://github.com/armd482/SprintFE/assets/89967066/81d1eb79-bea2-4b70-ad9b-fdead263cf15)
+    $ git checkout branch
+    $ git rebase main
+    $ git checkout main
+    $ git merge branch
+  ```
+  Rebase는 분기된 branch에 있는 모든 커밋을 복사하여 그대로 기존 branch의 커밋에 이어서 추가되는 방식이다. 마찬가지로 분기된 branch는 제거된다. Squash와의 차이라면 Squash는 분기된 커밋을 하나의 커밋으로 합쳐서 추가되는 반면에 Rebase는 분기된 branch 커밋이 그대로 추가된다는 점이다. 마지막에 merge되는 방식은 Fast-Forward 방식가 동일하다.<br>
+  ![image](https://github.com/armd482/SprintFE/assets/89967066/81d1eb79-bea2-4b70-ad9b-fdead263cf15)
 </details>
