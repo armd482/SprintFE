@@ -214,14 +214,13 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
   #### Object.assign()
   Object.assign()는 객체들의 열거 가능한(iterable) 속성을 복사하여 대상 객체에 같은 값으로 붙여넣는 메서드이다.<br>
   괄호 안에는 복사하려는 객체를 넣으면 되고, 여러 객체를 넣을 수 있다.<br>
-  만약 여러 객체를 복사할 때 중복된 키가 있을 경우, 가장 마지막의 값으로 대체된다.<br>
   ```javascript
   const target = { a: 1, b: 2 };
   const source = { b: 4, c: 5 };
 
   const returnedTarget = Object.assign(target, source);
 
-  console.log(target); //Expected output: Object { a: 1, b: 4, c: 5 }
+  console.log(target); // { a: 1, b: 4, c: 5 }
   ```
 
   #### 전개 연산자
@@ -233,9 +232,62 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
 
   const returnedTarget = {...target, ...source};
 
-  console.log(target); //Expected output: Object { a: 1, b: 4, c: 5 }
+  console.log(target); //{ a: 1, b: 4, c: 5 }
   ```
 
-  #### JSON.parse && JSON.stringify
+  #### 재귀 함수
+  재귀 함수를 이용하여 객체에 들어있는 원시 값을 하나씩 복사하여 구현할 수 있다.<br>
+  ```javascript
+  const copyObjectDeep = function (target){
+    let result = {};
+    if(typeof target === 'object' && target !== null){
+    	for( var prop in target){
+      	result[prop] = copyObjectDeep(target[prop]);
+    	}
+    }
+    else{
+    	  result = target
+    }
+    return result;
+  };
+  ```
   
+  #### JSON.parse && JSON.stringify
+  JSON은 JavaScript Object Notation의 약자로 데이터를 문자열 기반의 텍스트를 사용하여 데이터를 저장하고 전송하는 개방형 표준 파일 형식이다.<br>
+  JSON은 객체와 동일하게 키-값 구조로 되어있으나, 타입은 String이다.<br>
+  JSON.parse메소드는 json을 객체로 변환시키는 함수이며, JSON.stringify()는 객체를 json문자열로 변환하는 메소드이다.<br>
+  이때 JSON.stringify()를 사용하면, 원본 객체와의 참조가 끊어진다.<br>
+  하지만 위 방식은 함수의 경우 사용할 수 없다.<br>
+
+  ```javascript
+  const target = { a: 1, b: 2 };
+
+  cost returnTarget = JSON.parse(JSON.stringify(target));
+
+  console.log(target); //{ a: 1, b: 2 }
+  ```
+
+#### lodash 라이브러리 함수
+lodash라이브러리를 이용하여 구현가능하다.<br>
+lodash는 재귀함수를 이용하여 재귀적으로 값을 복사하는 방식을 이용하고 있다.<br>
+```javascript
+  import_from 'lodash'
+  const target = { a: 1, b: 2 };
+
+  cost returnTarget = _.cloneDeep(target);
+
+  console.log(target); //{ a: 1, b: 2 }
+  ```
+
+깊은 복사의 경우 두 객체의 값만 동일할 뿐 참조 값이 아예 다르므로, 두 객체를 단순히 같은지 출력하면 False로 나온다.<br>
+반면 얕은 복사는 두 객체의 참조값이 동일하기 때문에, true로 나온다.
+
+```javascript
+const data = {a: 1, b: 2};
+const shallowData = data;
+const deepData = {...data};
+
+console.log(deepData === data); // false
+console.log(shallowData === data); // true
+```
 </details>
