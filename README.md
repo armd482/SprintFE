@@ -188,11 +188,54 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
   따라서 참조형 데이터를 복사할 때, 값 자체를 복사할 지 아니면 참조값을 복사할 지로 나눌 수 있다.
 
   ### 얕은 복사(Shallow Copy)
-  얕은 복사는 객체의 참조값을 복사하는 것으로 다음과 같이 단순히 동등연산자를 이용하여 구현할 수 있다.
+  얕은 복사는 <b>객체의 참조값을 복사</b>하는 것으로 다음과 같이 단순히 동등연산자를 이용하여 구현할 수 있다.
   
   ```javascript
   const data = {name: "aaa", age: 30}
   const data2 = data1;
   ```
+  이때 data2의 name을 접근하면 기존 data데이터에서 name의 값을 가리키는 주소값을 그대로 받게 된다.<br>
+  만약 아래와 같이 얕은 복사를 한 data2를 수정할 경우 data1은 어떤 식으로 표시될까?<br>
+  
+  ```javascript
+  data2.name = "bbb";
+  console.log(data2); // {name: "bbb", age: 30}
+  console.log(data);  // {name: "bbb", age: 30}
+  ```
+  data의 값이 data2의 값과 동일하게 변경되었다<br>
+  이는 기존 data과 data2가 동일하게 name의 "aaa"값을 가리킨 상태에서 data2의 name값을 변경하면, 주소 값이 아닌 name의 값을 변경한다.<br>
+  이렇게되면 기존 data객체가 가리킨 name도 주소는 동일하지만 name의 값이 변경된 상태이므로, 변경된 name을 그대로 가리키게 된다.<br>
+  즉 얕은 복사는 <b>하나의 데이터를 공유</b>하는 것이다.<br>
+
+  ### 깊은 복사(Deep Copy)
+  깊은 복사는 객체의 값 자체를 복사하는 것으로 얕은 복사와 달리 기존 데이터와의 참조가 완전히 끊어진 객체이다.<br>
+  깊은 복사는 다음과 같은 방법으로 구현할 수 있다.<br>
+
+  #### Object.assign()
+  Object.assign()는 객체들의 열거 가능한(iterable) 속성을 복사하여 대상 객체에 같은 값으로 붙여넣는 메서드이다.<br>
+  괄호 안에는 복사하려는 객체를 넣으면 되고, 여러 객체를 넣을 수 있다.<br>
+  만약 여러 객체를 복사할 때 중복된 키가 있을 경우, 가장 마지막의 값으로 대체된다.<br>
+  ```javascript
+  const target = { a: 1, b: 2 };
+  const source = { b: 4, c: 5 };
+
+  const returnedTarget = Object.assign(target, source);
+
+  console.log(target); //Expected output: Object { a: 1, b: 4, c: 5 }
+  ```
+
+  #### 전개 연산자
+  전개 연산자는 반복 가능한 객체에 대해서 객체를 하나씩 펼쳐서 리턴한다.<br>
+  배열의 경우 [...data]로, 객체의 경우 {...data}로 함수의 경우 func(...data)로 구현할 수 있다<br>
+  ```javascript
+  const target = { a: 1, b: 2 };
+  const source = { b: 4, c: 5 };
+
+  const returnedTarget = {...target, ...source};
+
+  console.log(target); //Expected output: Object { a: 1, b: 4, c: 5 }
+  ```
+
+  #### JSON.parse && JSON.stringify
   
 </details>
