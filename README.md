@@ -171,3 +171,28 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
   ### Hotfix 브랜치
   Hotfix 브랜치는 <b>이미 배포된 버전에 문제가 발생했을 때를 위한 브랜치</b>이다. Main 브랜치에서 생성하며, 문제가 해결되면 Main과 Develop 브랜치에 둘 다 merge한다.
 </details>
+<details>
+  <summary>4주차 위클리페이퍼</summary>
+
+  ## 자바스크립트에서 얕은 복사(Shallow Copy)와 깊은 복사(Deep Copy)에 대해 설명해주세요.
+  
+  ### 데이터 타입
+  자바 스크립트에는 다음과 같이 두가지 형태의 데이터 타입으로 나눌 수 있다.
+  <ul>
+    <li>기본형 데이터</li>
+    <li>참조형 데이터</li>
+  </ul>
+  기본형 데이터는 Number, String, Boolean, Undefined, Null, Symbol로 총 6개이며, 이를 제외한 나머지 즉 객체를 참조형 데이터로 분류한다.<br>
+  기본형 데이터와 참조형 데이터의 가장 큰 차이점은 메모리 할당에 있다.<br>
+  기본형 데이터의 경우 해당 값 자체가 메모리에 할당되지만, 참조형 데이터는 해당 데이터를 가리키는 주소 값이 할당된다.<br>
+  따라서 참조형 데이터를 복사할 때, 값 자체를 복사할 지 아니면 참조값을 복사할 지로 나눌 수 있다.
+
+  ### 얕은 복사(Shallow Copy)
+  얕은 복사는 객체의 참조값을 복사하는 것으로 다음과 같이 단순히 동등연산자를 이용하여 구현할 수 있다.
+  
+  ```javascript
+  const data = {name: "aaa", age: 30}
+  const data2 = data1;
+  ```
+  
+</details>
