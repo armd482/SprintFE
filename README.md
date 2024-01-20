@@ -208,7 +208,7 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
   즉 얕은 복사는 <b>하나의 데이터를 공유</b>하는 것이다.<br>
 
   ### 깊은 복사(Deep Copy)
-  깊은 복사는 객체의 값 자체를 복사하는 것으로 얕은 복사와 달리 기존 데이터와의 참조가 완전히 끊어진 객체이다.<br>
+  깊은 복사는 <b>객체의 값 자체를 복사</b>하는 것으로 얕은 복사와 달리 기존 데이터와의 참조가 완전히 끊어진 객체이다.<br>
   깊은 복사는 다음과 같은 방법으로 구현할 수 있다.<br>
 
   #### Object.assign()
@@ -290,4 +290,113 @@ const deepData = {...data};
 console.log(deepData === data); // false
 console.log(shallowData === data); // true
 ```
+<br>
+
+## var, let, const 를 중복 선언 허용, 스코프, 호이스팅 관점에서 서로 비교해 주세요.
+자바스크립트에서 변수를 선언할 때 var, let, const로 변수를 선언할 수 있다.<br>
+var ES6 이전부터 사용하던 방식였으며, ES6부터 let과 const가 등장하였다.<br>
+let과 const는 기존 var에서 변수 재할당(값 교체)을 기준으로 구분하였다<br>
+let의 경우 변수 재할당이 가능한 반면, const는 재할당이 불가능하다.
+
+```javascript
+let l = 'first';
+console.log(l);
+
+l = 'second';
+console.log(l); // second;
+
+const l = 'first';
+console.log(l); // first
+
+l = 'second';
+console.log(l); // Uncaught TypeError: Assignment to constant variable.
+```
+
+### 중복 선언 허용
+중복 선언은 변수를 같은 이름으로 다시 선언하는 것을 의미한다.<br> 
+var의 경우 중복선언이 가능하였다.<br>
+하지만 이렇게 되면 해당 이름의 변수가 어디에서 어떻게 사용될지 파악하기 힘들고, 값이 덮어씌어지므로 중간에 실수로 값이 바뀔 수도 있다.<br>
+이를 보완하기 위해서 let과 const는 중복 선언이 되지 않는다.
+
+```javascript
+var v = 'first';
+console.log(v); // first
+
+var v = 'second'
+console.log(v); // second
+
+
+let l = 'first';
+console.log(l); // first
+
+let l = 'second';
+console.log(l); // Uncaught SyntaxError: Identifier 'l' has already been declared
+
+const l = 'first';
+console.log(l); // first
+
+const l = 'second';
+console.log(l); // Uncaught SyntaxError: Identifier 'c' has already been declared
+```
 </details>
+
+### 스코프
+스코프는 선언한 변수의 유효범위를 의미한다.<br>
+var과 let 그리고 const 모두 함수 내에서 선언할 경우, 함수 밖에서는 그 변수를 불러올 수 없다.<br>
+즉 세 변수 선언 방식이 모두 함수레벨의 스코프를 갖고 있다.<br>
+하지만 let과 const는 if문, for문 while문 등 블록 내에서 선언할 경우, 블록 밖에서 그 변수를 불러올 수 없다<br>
+즉 let과 const는 블록레벨의 스코프를 갖고 있다.
+
+```javascript
+function a() {
+  var v = 1;
+  let l = 2;
+  const c = 3;
+}
+
+console.log(v, l, c) // ReferencError: v, l, c are not defined
+
+if(true) {
+  var va = 1;
+  let le = 2;
+  const co = 3; 
+}
+
+console.log(va, le, co) // 1, ReferencError: l, c are not defined
+```
+
+### 호이스팅
+호이스팅은 스코프 안에서 선언한 변수 대해서 해당 변수 선언을 위로 끌어 올려서 유효 범위 최상단에 선언되도록 하는 의미이다.<br>
+var, const, let 모두 호이스팅이 발생하나, let과 const는 var과 다르게 호이스팅이 발생한다.<br>
+<br>
+var의 경우 선언되기 이전에 해당 변수에 접근한 후, 변수를 선언할 경우 아래와 같이 문제 없이 코드가 실행된다.
+```javascript
+console.log(v); // undefined
+var v = 1;
+console.log(v) //1
+```
+반면 let이나 const의 경우 선언되기 이전에 해당 변수를 불러올 경우 에러가 발생한다.
+```javascript
+console.log(l); // ReferenceError: Cannot access 'l' before initialization
+let l = 2;
+console.log(l) // 2
+```
+하지만 다음과 같은 코드를 통해서 호이스팅이 발생하는 것을 알 수 있다.
+```javascrit
+function a() {
+  return l
+}
+let l = 1;
+console.log(a()) // 1
+```
+이는 TDZ에 영향을 받기 때문인데,<br>
+TDZ는 Temporal Death Zon으로 값을 할당하기 전에는 사용할 수 없는 공간이다.
+변수의 생성 과정은 다음과 같다.
+<ol>
+  <li>선언 - 스코프와 변수 객체가 생성되고 스코프가 변수 객체를 참조한다</li>
+  <li>초기화 - 변수 객체 값을 위한 공간을 메모리에 할당되고, 이때의 값은 undefined다.</li>
+  <li>할당 - 변수 객체에 값을 할당한다.</li>
+</ol>
+var은 선언과 동시에 초기화가 이뤄지지만, let은 선언만 될 뿐 초기화가 되지 않는다. 반면 const는 선언과 동시에 초기화와 할당이 된다.<br>
+따라서 let의 경우 선언만 할 경우 TDZ에 들어가게 되고, 결과적으로 선언은 되었지만 초기화가 이뤄지지 않아서 메모리에 할당이 안된 상태이다.<br>
+즉 var, let, const 모두 호이스팅은 이뤄지나, let의 경우 단순 선언만 할 경우 에러가 발생하는 반면 var은 초기화가 이뤄져 undefined 값으로 정상작동한다.<br>
