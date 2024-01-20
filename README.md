@@ -338,7 +338,6 @@ console.log(l); // first
 const l = 'second';
 console.log(l); // Uncaught SyntaxError: Identifier 'c' has already been declared
 ```
-</details>
 
 ### 스코프
 스코프는 선언한 변수의 유효범위를 의미한다.<br>
@@ -400,3 +399,4 @@ TDZ는 Temporal Death Zon으로 값을 할당하기 전에는 사용할 수 없�
 var은 선언과 동시에 초기화가 이뤄지지만, let은 선언만 될 뿐 초기화가 되지 않는다. 반면 const는 선언과 동시에 초기화와 할당이 된다.<br>
 따라서 let의 경우 선언만 할 경우 TDZ에 들어가게 되고, 결과적으로 선언은 되었지만 초기화가 이뤄지지 않아서 메모리에 할당이 안된 상태이다.<br>
 즉 var, let, const 모두 호이스팅은 이뤄지나, let의 경우 단순 선언만 할 경우 에러가 발생하는 반면 var은 초기화가 이뤄져 undefined 값으로 정상작동한다.<br>
+</details>
