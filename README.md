@@ -2,7 +2,7 @@
 코드잇 스프린트 4기 과제/프로젝트 기록용
 
 <details>
-  <summary>1주차 위클리페이퍼</summary>
+  <summary>1주차 위클리 페이퍼</summary>
 
   ## CSS의 Cascading에 대해 설명해 주세요.<br>
   <b>CSS</b>는 <b>Cascading Style Sheet</b>의 약자로, 계층을 가진 스타일시트이다.<br>
@@ -42,7 +42,7 @@
   코드 순서는 <b>나중에 작성한 스타일</b>이 우선적으로 적용된다.
 </details>
 <details>
-  <summary>2주차 위클리페이퍼</summary>
+  <summary>2주차 위클리 페이퍼</summary>
   
   ## 시맨틱 태그를 사용하면 좋은 점을 설명해주세요<br>
   ### 시맨틱 태그 정의<br>
@@ -172,7 +172,7 @@ sticky의 경우 top, left, bottom, right 중 적어도 하나의 속성 값을 
   Hotfix 브랜치는 <b>이미 배포된 버전에 문제가 발생했을 때를 위한 브랜치</b>이다. Main 브랜치에서 생성하며, 문제가 해결되면 Main과 Develop 브랜치에 둘 다 merge한다.
 </details>
 <details>
-  <summary>4주차 위클리페이퍼</summary>
+  <summary>4주차 위클리 페이퍼</summary>
 
   ## 자바스크립트에서 얕은 복사(Shallow Copy)와 깊은 복사(Deep Copy)에 대해 설명해주세요.
   
