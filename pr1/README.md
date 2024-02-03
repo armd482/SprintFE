@@ -2,7 +2,7 @@
 코드잇 스프린트 4기 과제/프로젝트 기록용
 
 ### part1
-https://linkbrary-armd482-week6.netlify.app/
+https://weekly-mission-part1-armd482.netlify.app
 
 <details>
   <summary>1주차 위클리 페이퍼</summary>
