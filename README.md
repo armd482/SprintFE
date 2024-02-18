@@ -539,3 +539,97 @@ Virtual DOM은 이러한 렌더링 연산 횟수를 감소시키기 위해 사�
   이로 인해 개별 Element에 대한 리렌더링이 아닌 전체 Element에 대해서 렌더링이 발생하게 되고 이는 성능적으로 비효율적으로 렌더링을 하게 된다.<br>
   따라서 배열을 렌더링할 때 key를 사용하므로써, 개별 Element의 변화를 감지하여 변화된 개별 Element만 렌더링을 발생시켜 <b>좀 더 효율적으로 변화에 대한 감지와 렌더링을 관리</b>할 수 있다.
 </details>
+<details>
+  <summary>
+    8주차 위클리 페이퍼
+  </summary>
+
+  ## 리액트 생명주기(life cycle)에 대해 설명해 주세요.
+  리액트 컴포넌트에는 생명주기 사이클이 존재한다. 생명 주기는 <b>생셩(mounting) - 업데이트(updating) - 제거(unmounting)</b>단계로 구성되어 있으며, 각 단계마다 특정한 이벤트가 발생하며 그 때마다 사용하는 메서드가 있다<br>
+  이러한 생명 주기 함수는 <b>클래스형 컴포넌트<에서만 사용</b>할 수 있으며 함수형 컴포넌트에서는 사용할 수 없다.<br>
+  대신 <b>함수형 컴포넌트는 Hooks</b>로 유사한 기능을 규현할 수 았다.<br> 
+
+  ### 생성(Mounting)
+
+  #### 클래스형 컴포넌트
+  ```
+  constructor()
+  : 컴포넌트가 호출되어 로드가 된 이후 렌더링되기 이전에 '데이터 바인딩', '초기화'를 수행하기 위해 호출되는 함수
+  - state의 저장 공간에서 변수 값을 초기화 할 때  사용
+
+  render()
+  :미리 구현된 html을 화면사에 그려지는 과정을 수행하는 함수
+  - 해당 공간에서는 constructor()에서 정의한 state값의 접근이 가능, setState는 사용 못함
+
+  componentDidMount()
+  : 화면이 렌더링 된 이후에 해당 컴포넌트를 DOM 트리에 마운트되면 발생하는 메서드
+  - 자바스크립트 라이브러리 또는 프레임워크의 함수를 호출하거나 이벤트 등록에 사용
+  - setTimeout, setInteval, 네트워크 요청 같은 비동기 작업을 처리할 때 사용용
+  
+  ```
+  ```javascript
+  imoort React from "react";
+
+  class Component extends React.Component {
+    construct() {
+      super(props);
+      this.state = {
+        id: 'test',
+        age: 50
+      }
+    };
+
+    componentDidMount = () => {
+      console.log("화면이 렌더링 된 이후에 바로 수행");
+    }
+    render(): React.ReactNode{
+      return(
+        <div>
+          <h1>Main</h1>
+          <div>{this.state.id}</div>
+        </div>
+      );
+    }
+  }
+  ```
+
+#### 함수형 컴포넌트
+```
+함수형 컴포넌트 내부 자체
+: 컴포넌트가 호출이 되었을 때 가장 먼저 컴포넌트 내부가 호출
+- state나 ref를 정의
+
+return()
+: 미리 구현된 HTML을 화면상에 그려지는 과정을 수행하는 함수
+- props의 값을 접근할 수 있으며, 컴포넌트 내부에서 정의한 state값을 접근 가능
+
+useEffect(() => {...}, [])
+: 컴포넌트 내부에서 렌더링이 수행 된 이후에 단 한번만 실행되는 함수
+```
+
+```javascript
+import React, {useEffect. useState} from 'react';
+
+const Component = () => {
+  const[user,setUser] = useState({
+    id: 'test';
+    age: 50
+  });
+
+  useEffect(() => {
+    console.log('화면 렌더링 된 이후에 바로 수행')
+  }, []);
+
+  return (
+    <>
+      <div>
+        <h1>Main</h1>
+        <div>{user.id}</div>
+      </div>
+    </>
+  )
+}
+```
+
+  ## 웹 페이지 렌더링 방식 CSR, SSR, SSG 각각의 특징과 각 방식을 어떤 상황에 사용하면 좋을지 설명해 주세요.
+</details>
