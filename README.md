@@ -567,7 +567,52 @@ Virtual DOM은 이러한 렌더링 연산 횟수를 감소시키기 위해 사�
   - setTimeout, setInteval, 네트워크 요청 같은 비동기 작업을 처리할 때 사용용
   
   ```
-  ```javascript
+#### 함수형 컴포넌트
+```
+함수형 컴포넌트 내부 자체
+: 컴포넌트가 호출이 되었을 때 가장 먼저 컴포넌트 내부가 호출
+- state나 ref를 정의 => constructor()와 동일한 기능 수행
+
+return()
+: 미리 구현된 HTML을 화면상에 그려지는 과정을 수행하는 함수
+- props의 값을 접근할 수 있으며, 컴포넌트 내부에서 정의한 state값을 접근 가능
+
+useEffect(() => {...}, [])
+: 컴포넌트 내부에서 렌더링이 수행 된 이후에 단 한번만 실행되는 함수
+```
+### 업데이트(Updating)
+#### 클래스형 컴포넌트
+```
+componentDidUpdate()
+: 컴포넌트 내에서 변화가 발생된 이후 호출되는 메서드
+- props 변경, state 변경, forceUpdate()를 수행할 때 호출됨
+```
+
+#### 함수형 컴포넌트
+```
+useEffect(() => {}, [...value])
+: 컴포넌트 내에서 value의 변화가 생길 때 호출되는 메서드
+- props 값, 부모 컴포넌트 리렌더링, state가 변할 경우, 즉 렌더링이 발생할 때 value가 바꼈을 때 수행
+```
+
+### 제거(Unmonting)
+#### 클래스형 컴포넌트
+```
+componentWillUnmount()
+: 컴포넌트가 DOM에서 제거되기 직전에 호출되는 메서드
+- 컴포넌트가 사용 중인 리소스를 해제허가너 구독을 취소하는 경우 호출
+- 타이머 해제, 네크워크 요청 취소와 같은 클린업 작업을 하는 경우 호출
+```
+
+#### 함수형 컴포넌트
+```
+useEffect(() => {return: {...}, [...value]})
+: 컴포넌트가 DOM에서 제거되기 직전에 호출되는 메서드
+```
+
+### 예시
+#### 클래스형 컴포넌트
+ ```javascript
   imoort React from "react";
 
   class Component extends React.Component {
@@ -582,6 +627,14 @@ Virtual DOM은 이러한 렌더링 연산 횟수를 감소시키기 위해 사�
     componentDidMount = () => {
       console.log("화면이 렌더링 된 이후에 바로 수행");
     }
+
+    componentDidUpdate = () => {
+       console.log('화면이 업데이트 될 때마다 수행');
+    }
+
+    componentWillUnmount = () => {
+      console.log('컴포넌트가 삭제될 때 수행');
+    }
     render(): React.ReactNode{
       return(
         <div>
@@ -594,19 +647,6 @@ Virtual DOM은 이러한 렌더링 연산 횟수를 감소시키기 위해 사�
   ```
 
 #### 함수형 컴포넌트
-```
-함수형 컴포넌트 내부 자체
-: 컴포넌트가 호출이 되었을 때 가장 먼저 컴포넌트 내부가 호출
-- state나 ref를 정의
-
-return()
-: 미리 구현된 HTML을 화면상에 그려지는 과정을 수행하는 함수
-- props의 값을 접근할 수 있으며, 컴포넌트 내부에서 정의한 state값을 접근 가능
-
-useEffect(() => {...}, [])
-: 컴포넌트 내부에서 렌더링이 수행 된 이후에 단 한번만 실행되는 함수
-```
-
 ```javascript
 import React, {useEffect. useState} from 'react';
 
@@ -617,8 +657,12 @@ const Component = () => {
   });
 
   useEffect(() => {
-    console.log('화면 렌더링 된 이후에 바로 수행')
-  }, []);
+    console.log('화면 렌더링 된 이후에 바로 수행');
+    console.log('user값이 변경될 때도 수행');
+    return {
+      console.log('컴포넌트가 제거될 때 수행');
+    }
+  }, [user]);
 
   return (
     <>
@@ -630,6 +674,7 @@ const Component = () => {
   )
 }
 ```
+
 
   ## 웹 페이지 렌더링 방식 CSR, SSR, SSG 각각의 특징과 각 방식을 어떤 상황에 사용하면 좋을지 설명해 주세요.
 </details>
