@@ -798,7 +798,7 @@ const Component = () => {
 </details>
 
 <details>
-  <summary>14주차 위클리 미션</summary>
+  <summary>14주차 위클리 페이퍼</summary>
 
   # Next.js에서 SSR을 실행하는 과정과 hydration에 대해 설명해 주세요.
   SSR은 서버에서는 빈 HTML파일을 보내고, 클라이언트에서 자바스크립트와 CSS를 이용하여 동적으로 HTML을 생성하여 렌더링하는 방식인 CSR과 다르게<br>
